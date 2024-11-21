@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->enum('status', ['Assigned', 'In progress', 'Closed'])->default('Assigned');
+            $table->string('title');
+            $table->text('description');
+            $table->foreignId('operator_id')->constrained('operators');
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
     }
