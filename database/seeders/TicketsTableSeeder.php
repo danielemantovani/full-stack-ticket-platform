@@ -16,14 +16,19 @@ class TicketsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        // Genera 15 ticket fittizi
-        for ($i = 0; $i < 15; $i++) {
+        // Recupero tutti gli operatori e categorie
+        $operators = Operator::all();
+        $categories = Category::all();
+
+        for ($i = 0; $i < 10; $i++) {
             $newTicket = new Ticket();
-            $newTicket->title = $faker->sentence; 
+            $newTicket->title = $faker->sentence;
             $newTicket->description = $faker->text;
-            $newTicket->status = $faker->randomElement(['ASSIGNED', 'IN PROGRESS', 'CLOSED']); // Stato del ticket
-            $newTicket->operator_id = Operator::inRandomOrder()->first()->id; // Assegna un operatore casuale
-            $newTicket->category_id = Category::inRandomOrder()->first()->id; // Assegna una categoria casuale
+            $newTicket->status = $faker->randomElement(['Assigned', 'In progress', 'Closed']);
+
+            // Seleziona un operatore e una categoria casuali solo se esistono
+            $newTicket->operator_id = $operators->random()->id ?? null;
+            $newTicket->category_id = $categories->random()->id ?? null;
             $newTicket->save();
         }
     }

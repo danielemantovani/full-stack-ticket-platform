@@ -19,7 +19,8 @@ class OperatorsTableSeeder extends Seeder
             $newOperator = new Operator();
             $newOperator->name = $faker->name;
             $newOperator->email = $faker->unique()->safeEmail;
-            $newOperator->available = $faker->boolean(100); // 100% di possibilità che l'operatore sia disponibile
+            $newOperator->available = $faker->boolean(90); // 90% di possibilità che l'operatore sia disponibile
+            $newOperator->save();
         }
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')-> unique();
-            $table->boolean('avaible')->default(true);
+            $table->boolean('available')->default(true);
             $table->timestamps();
         });
     }
